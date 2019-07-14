@@ -97,7 +97,7 @@ export default class Toolbar extends React.Component {
     const selection = store.getItem('getEditorState')().getSelection();
     // overrideContent could for example contain a text input, hence we always show overrideContent
     // TODO: Test readonly mode and possibly set isVisible to false if the editor is readonly
-    const isVisible = (!selection.isCollapsed() && selection.getHasFocus()) || overrideContent;
+    const isVisible = !selection.isCollapsed() || overrideContent;
     const style = { ...position };
 
     if (isVisible) {

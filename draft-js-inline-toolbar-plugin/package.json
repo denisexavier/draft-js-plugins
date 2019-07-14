@@ -1,14 +1,14 @@
 {
-  "name": "draft-js-inline-toolbar-plugin",
-  "version": "3.0.0",
+  "name": "draft-js-custom-inline-toolbar-plugin",
+  "version": "3.0.1",
   "description": "Toolbar Plugin for DraftJS",
   "author": {
-    "name": "Benjamin Kniffler",
-    "email": "benjamin@kniffler.com"
+    "name": "Ren Wei",
+    "email": "371151833@qq.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/draft-js-plugins/draft-js-plugins.git"
+    "url": "https://github.com/szrenwei/draft-js-plugins.git"
   },
   "main": "lib/index.js",
   "keywords": [
