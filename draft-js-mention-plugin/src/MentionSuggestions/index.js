@@ -278,6 +278,10 @@ export class MentionSuggestions extends Component {
     if (this.props.onOpen) {
       this.props.onOpen();
     }
+
+    if (this.props.store) {
+      this.props.store.setIsOpened(true);
+    }
   };
 
   closeDropdown = () => {
@@ -297,6 +301,10 @@ export class MentionSuggestions extends Component {
 
     if (this.props.onClose) {
       this.props.onClose();
+    }
+
+    if (this.props.store) {
+      this.props.store.setIsOpened(false);
     }
   };
 
