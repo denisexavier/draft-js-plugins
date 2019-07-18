@@ -136,11 +136,31 @@ export default (config = {}) => {
       store.setEditorState = setEditorState;
     },
 
-    onDownArrow: (keyboardEvent) => callbacks.onDownArrow && callbacks.onDownArrow(keyboardEvent),
-    onTab: (keyboardEvent) => callbacks.onTab && callbacks.onTab(keyboardEvent),
-    onUpArrow: (keyboardEvent) => callbacks.onUpArrow && callbacks.onUpArrow(keyboardEvent),
-    onEscape: (keyboardEvent) => callbacks.onEscape && callbacks.onEscape(keyboardEvent),
+    keyBindingFn: function keyBindingFn(keyboardEvent) {
+      const keyCode = keyboardEvent.which;
+      switch (keyCode) {
+        case 9: // TAB
+          callbacks.onTab && callbacks.onTab(keyboardEvent);
+          break;
+        case 27: // ESC
+          callbacks.onEscape && callbacks.onEscape(keyboardEvent);
+          break;
+        case 38: // UP
+          callbacks.onUpArrow && callbacks.onUpArrow(keyboardEvent);
+          break;
+        case 40: // DOWN
+          callbacks.onDownArrow && callbacks.onDownArrow(keyboardEvent);
+          break;
+      }
+    },
+
+    // onDownArrow: (keyboardEvent) => callbacks.onDownArrow && callbacks.onDownArrow(keyboardEvent),
+    // onTab: (keyboardEvent) => callbacks.onTab && callbacks.onTab(keyboardEvent),
+    // onUpArrow: (keyboardEvent) => callbacks.onUpArrow && callbacks.onUpArrow(keyboardEvent),
+    // onEscape: (keyboardEvent) => callbacks.onEscape && callbacks.onEscape(keyboardEvent),
+
     handleReturn: (keyboardEvent) => callbacks.handleReturn && callbacks.handleReturn(keyboardEvent),
+
     onChange: (editorState) => {
       if (callbacks.onChange) return callbacks.onChange(editorState);
       return editorState;

@@ -1,6 +1,6 @@
 {
   "name": "draft-js-custom-mention-plugin",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "description": "Mention Plugin for DraftJS",
   "author": {
     "name": "Ren Wei",
