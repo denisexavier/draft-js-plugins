@@ -96,6 +96,15 @@ export class MentionSuggestions extends Component {
     const anchorKey = selection.getAnchorKey();
     const anchorOffset = selection.getAnchorOffset();
 
+    // 来自: https://github.com/react-component/editor-mention/blob/master/src/component/Suggestions.react.jsx#L50
+    // 修复: 焦点移出再移入时, dropdown 会闪动一下
+    // 原因: https://github.com/facebook/draft-js/blob/67c5e69499e3b0c149ce83b004872afdf4180463/src/component/handlers/edit/editOnFocus.js#L33
+    // 此处强制 update 了一下,因此 onEditorStateChange 会 call 两次
+    // 这里判断的是上一个 state 没有焦点，本次有焦点，则直接返回
+    if (!this.props.store.getEditorState().getSelection().getHasFocus() && selection.getHasFocus()) {
+      return editorState;
+    }
+
     // the list should not be visible if a range is selected or the editor has no focus
     if (!selection.isCollapsed() || !selection.getHasFocus()) return removeList();
 
