@@ -349,20 +349,25 @@ export class MentionSuggestions extends Component {
         id: `mentions-list-${this.key}`,
         ref: (element) => { this.popover = element; },
       },
-      this.props.suggestions.map((mention, index) => (
-        <Entry
-          key={mention.id != null ? mention.id : mention.name}
-          onMentionSelect={this.onMentionSelect}
-          onMentionFocus={this.onMentionFocus}
-          isFocused={this.state.focusedOptionIndex === index}
-          mention={mention}
-          index={index}
-          id={`mention-option-${this.key}-${index}`}
-          theme={theme}
-          searchValue={this.lastSearchValue}
-          entryComponent={entryComponent || defaultEntryComponent}
-        />
-      ))
+      // add a wrapper for outside use
+      <div className={theme.mentionSuggestionsList}>
+        {
+          this.props.suggestions.map((mention, index) => (
+            <Entry
+              key={mention.id != null ? mention.id : mention.name}
+              onMentionSelect={this.onMentionSelect}
+              onMentionFocus={this.onMentionFocus}
+              isFocused={this.state.focusedOptionIndex === index}
+              mention={mention}
+              index={index}
+              id={`mention-option-${this.key}-${index}`}
+              theme={theme}
+              searchValue={this.lastSearchValue}
+              entryComponent={entryComponent || defaultEntryComponent}
+            />
+          ))
+        }
+      </div>
     );
   }
 }
