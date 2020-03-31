@@ -229,12 +229,8 @@ export class MentionSuggestions extends Component {
       return;
     }
 
-    if (this.props.onAddMention) {
-      this.props.onAddMention(mention);
-    }
-
     this.closeDropdown();
-    const newEditorState = addMention(
+    const { newEditorState, entityKey } = addMention(
       this.props.store.getEditorState(),
       mention,
       this.props.mentionPrefix,
@@ -242,6 +238,10 @@ export class MentionSuggestions extends Component {
       this.props.entityMutability,
     );
     this.props.store.setEditorState(newEditorState);
+
+    if (this.props.onAddMention) {
+      this.props.onAddMention(mention, entityKey);
+    }
   };
 
   onMentionFocus = (index) => {

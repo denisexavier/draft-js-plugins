@@ -42,7 +42,10 @@ const addMention = (editorState, mention, mentionPrefix, mentionTrigger, entityM
     mentionReplacedContent,
     'insert-mention',
   );
-  return EditorState.forceSelection(newEditorState, mentionReplacedContent.getSelectionAfter());
+  return {
+    newEditorState: EditorState.forceSelection(newEditorState, mentionReplacedContent.getSelectionAfter()),
+    entityKey,
+  };
 };
 
 export default addMention;
