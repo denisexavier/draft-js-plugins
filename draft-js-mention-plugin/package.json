@@ -1,6 +1,6 @@
 {
   "name": "draft-js-custom-mention-plugin",
-  "version": "3.2.1",
+  "version": "3.3.0-alpha.0",
   "description": "Mention Plugin for DraftJS",
   "author": {
     "name": "Ren Wei",
@@ -31,10 +31,11 @@
   "license": "MIT",
   "dependencies": {
     "decorate-component-with-props": "^1.0.2",
+    "fbjs": "^1.0.0",
     "find-with-regex": "^1.1.3",
     "immutable": "~3.7.4",
-    "prop-types": "^15.5.8",
     "lodash.escaperegexp": "^4.1.2",
+    "prop-types": "^15.5.8",
     "union-class-names": "^1.0.0"
   },
   "peerDependencies": {

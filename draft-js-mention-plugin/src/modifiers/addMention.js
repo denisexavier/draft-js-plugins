@@ -11,23 +11,35 @@ const addMention = (editorState, mention, mentionPrefix, mentionTrigger, entityM
   const currentSelectionState = editorState.getSelection();
   const { begin, end } = getSearchText(editorState, currentSelectionState, mentionTrigger);
 
-  // get selection of the @mention search text
-  const mentionTextSelection = currentSelectionState.merge({
-    anchorOffset: begin,
-    focusOffset: end,
-  });
-
-  let mentionReplacedContent = Modifier.replaceText(
+  let mentionReplacedContent = Modifier.insertText(
     editorState.getCurrentContent(),
-    mentionTextSelection,
+    currentSelectionState.merge({
+      anchorOffset: begin,
+      focusOffset: begin,
+    }),
+    '\u200B',
+  );
+
+  mentionReplacedContent = Modifier.replaceText(
+    mentionReplacedContent,
+    currentSelectionState.merge({
+      anchorOffset: begin + 1,
+      focusOffset: end + 1,
+    }),
     `${mentionPrefix}${mention.name}`,
     null, // no inline style needed
     entityKey
   );
 
+  mentionReplacedContent = Modifier.insertText(
+    mentionReplacedContent,
+    mentionReplacedContent.getSelectionAfter(),
+    '\u200B',
+  );
+
   // If the mention is inserted at the end, a space is appended right after for
   // a smooth writing experience.
-  const blockKey = mentionTextSelection.getAnchorKey();
+  const blockKey = currentSelectionState.getAnchorKey();
   const blockSize = editorState.getCurrentContent().getBlockForKey(blockKey).getLength();
   if (blockSize === end) {
     mentionReplacedContent = Modifier.insertText(
